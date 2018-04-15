@@ -35,53 +35,60 @@ std::string Computer::getAnswer()
 		lastLetter = toupper(lastLetter);
 
 		//-----------------------------------------------------------------------------------------
-				//hard difficulty
+//hard difficulty
 			//If lastLetter = Mit will ensure AI victory
-		if (diffLevel == "3") {
-			if ((lastLetter == i[0]) && (lastLetter == m)) {
+	if (diffLevel == "3") {
 				//sets the Computers answer to a word that both starts and ends with the letter M
-				if (i[i.length() - 1] == m) {
+				if ((lastLetter == i[0])&&(i[i.length() - 1] == m)) {
 					ComputerAnswer = i;
 					std::cout << "hard" << std::endl;
+				}
+				/*If I doesnt == m*/
+				if ((lastLetter == i[0]) && (i[i.length() - 1] != m)) {
+					ComputerAnswer = i;
+					std::cout << ComputerAnswer << std::endl;
+					std::cout << "hard" << std::endl;
+				}
+				return ComputerAnswer;
+				words.remove(ComputerAnswer);
+			//
+			//	//-----------------------------------------------------------------------------------------
+//Medium difficulty
+				//check to see if the last letter is = to the first letter of the list word being checked.
+			if (diffLevel == "2") {
+					//sets the Computers answer if there is an option to avoid setting on m
+					 if ((lastLetter == i[0])&&(i.length() - 1 != m)) {
+						ComputerAnswer = i;
+						std::cout << ComputerAnswer << std::endl;
+						std::cout << "Medium" << std::endl;
+					}
+
+					 //if Medium cant use a word thats not m
+					 if ((lastLetter == i[0]) && (i.length() - 1 == m)) {
+						 ComputerAnswer = i;
+						 std::cout << ComputerAnswer << std::endl;
+						 std::cout << "Medium" << std::endl;
+					 }
+					return ComputerAnswer;
+					words.remove(ComputerAnswer);
+			}
+
+
+			//----------------------------------------------------------------------------------------
+//Easy difficulty
+
+		//sets the Computers answer to the first avaliable answer that fits the criteria
+			if (diffLevel == "1") {
+				if (lastLetter == i[0]) {
+					ComputerAnswer = i;
+					std::cout << ComputerAnswer << std::endl;
+					std::cout << "easy" << std::endl;
 				}
 				return ComputerAnswer;
 				words.remove(ComputerAnswer);
 			}
 		}
-
-
-		//-----------------------------------------------------------------------------------------
-				//Medium difficulty
-		//check to see if the last letter is = to the first letter of the list word being checked.
-		if (diffLevel == "2"){
-			if ((lastLetter == i[0]) && (lastLetter != m)) {
-				//sets the Computers answer if there is an option to avoid setting on m
-				if (i.length() - 1 != m) {
-					ComputerAnswer = i;
-					std::cout << ComputerAnswer << std::endl;
-					std::cout << "Medium" << std::endl;
-				}
-					return ComputerAnswer;
-					words.remove(ComputerAnswer);
-				}
-			}
-
-		//----------------------------------------------------------------------------------------
-		//Easy difficulty
-
-	//sets the Computers answer to the first avaliable answer that fits the criteria
-		if (diffLevel == "1") {
-			if (lastLetter == i[0]) {
-				ComputerAnswer = i;
-				std::cout << ComputerAnswer << std::endl;
-				std::cout << "easy" << std::endl;
-			}
-			return ComputerAnswer;
-			words.remove(ComputerAnswer);
-		}
-
-
+	}
 		std::cout << diffLevel << std::endl;
 		return ComputerAnswer;
 	}
-}
