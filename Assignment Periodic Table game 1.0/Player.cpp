@@ -34,4 +34,5 @@ std::string Player::getAnswer()
 	getline(std::cin, answer);
 	return answer;
 
+
 }
