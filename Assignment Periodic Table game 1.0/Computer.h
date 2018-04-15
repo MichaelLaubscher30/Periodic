@@ -8,14 +8,12 @@ class Computer:public Player
 private:
 	std::list<std::string>& words;
 	std::string &lastAnswer;
-	
+	std::string diffLevel;
 	
 public:
-	Computer(std::list<std::string>&words,std::string &lastAnswer);
+	Computer::Computer(std::list<std::string> &words, std::string &lastAnswer, std::string diffLevel);
 	~Computer();
 	std::string getAnswer()override;
-
-
 
 };
 
