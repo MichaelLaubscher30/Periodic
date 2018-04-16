@@ -27,46 +27,66 @@ std::string Computer::getAnswer()
 	//where Last letter of the last played answer will be held
 	char lastLetter;
 
+
+	std::string hardAnswer;
+	std::string mediumAnswer;
+	std::string easyAnswer;
 	//for loop to itterate through the list
 	for (auto& i : words) {
 		//gets the last letter of the last anser played
 		lastLetter = lastAnswer[lastAnswer.length() - 1];
 		//changes the casing of the last letter to uppercase
 		lastLetter = toupper(lastLetter);
+		//check to see if the last letter is = to the first letter of the list word being checked.
 
-		//-----------------------------------------------------------------------------------------
-//easy difficulty
-		if ((diffLevel == "3") || (diffLevel == "2") || (diffLevel == "1")) {
-			if (lastLetter == i[0]) {
-				return i;
-				std::cout << ComputerAnswer << std::endl;
-				std::cout << "easy" << std::endl;
-			}
+		if (lastLetter != i[0])
+		{
+			continue;
 		}
-		//----------------------------------------------------------------------------------------
 
-//Medium difficulty
-				//check to see if the last letter is = to the first letter of the list word being checked.
-		if (diffLevel == "2" || (diffLevel == "3")) {
-			//sets the Computers answer if there is an option to avoid setting on m
-			if ((lastLetter == i[0]) && (i.length() - 1 != m)) {
-				return i;
-				std::cout << ComputerAnswer << std::endl;
-				std::cout << "Medium" << std::endl;
-			}
-		}
 		//----------------------------------------------------------------------------------------
 //Hard difficulty
 	//If lastLetter = Mit will ensure AI victory
 		if (diffLevel == "3") {
-			//sets the Computers answer to a word that both starts and ends with the letter M
-			if ((lastLetter == i[0]) && (i[i.length() - 1] == m)) {
-				return i;
-				std::cout << "hard" << std::endl;
+			if (lastLetter == m && i[i.length() - 1] == m){
+				hardAnswer = i;
+				//Doesnt seem to set a word like magnesium when the player inputs a word that ends in m
+			}
+			else
+			{
+				continue;
 			}
 		}
-		std::cout << diffLevel << std::endl;
-		ComputerAnswer = i;
-		return ComputerAnswer;
+
+		//----------------------------------------------------------------------------------------
+	//Medium difficulty
+		if (diffLevel == "2" || diffLevel == "3") {
+			if (i[i.length() - 1] != m) {
+				mediumAnswer = i;
+			}
+		}
+		//-----------------------------------------------------------------------------------------
+		//easy difficulty
+		if (diffLevel == "1" || diffLevel == "2" || diffLevel == "3") {
+			if (i[i.length() - 1] == lastLetter) {
+				easyAnswer = i;
+			}
+		}
+
 	}
-}
+		if (!hardAnswer.empty())
+		{
+			std::cout << "hard" << std::endl;
+
+			return hardAnswer;
+		}
+		if (!mediumAnswer.empty())
+		{
+			std::cout << "Medium" << std::endl;
+
+			return mediumAnswer;
+		}
+		std::cout << "easy" << std::endl;
+
+		return easyAnswer;
+	}
