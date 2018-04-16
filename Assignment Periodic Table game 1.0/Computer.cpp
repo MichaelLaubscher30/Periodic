@@ -18,7 +18,7 @@ Computer::~Computer()
 std::string Computer::getAnswer()
 {
 	//holds the letter m
-	char m = 'm';
+	char m = 'M';
 	//AI answer if there is a option to use a word that ends in m
 	std::string AIanswer;
 	//Answer that gets sent to the periodic.cpp main as the Computers answer
@@ -48,32 +48,45 @@ std::string Computer::getAnswer()
 //Hard difficulty
 	//If lastLetter = Mit will ensure AI victory
 		if (diffLevel == "3") {
-			if (lastLetter == m && i[i.length() - 1] == m){
-				hardAnswer = i;
-				//Doesnt seem to set a word like magnesium when the player inputs a word that ends in m
-			}
-			else
-			{
-				continue;
+			if (lastLetter == m) {
+				if (i[i.length() - 1] == m) {
+					hardAnswer = i;
+					break;
+				}
+				else {
+					continue;
+				}
 			}
 		}
-
 		//----------------------------------------------------------------------------------------
 	//Medium difficulty
 		if (diffLevel == "2" || diffLevel == "3") {
-			if (i[i.length() - 1] != m) {
-				mediumAnswer = i;
-			}
-		}
-		//-----------------------------------------------------------------------------------------
-		//easy difficulty
-		if (diffLevel == "1" || diffLevel == "2" || diffLevel == "3") {
-			if (i[i.length() - 1] == lastLetter) {
-				easyAnswer = i;
+			if (lastLetter != m) {
+				if (i[i.length() - 1] != m) {
+					mediumAnswer = i;
+					break;
+				}
+				else {
+					continue;
+				}
 			}
 		}
 
-	}
+		//-----------------------------------------------------------------------------------------
+		//easy difficulty
+		if (diffLevel == "1" || diffLevel == "2" || diffLevel == "3") {
+			if (lastLetter != m) {
+				if (i[i.length() - 1] == m) {
+					mediumAnswer = i;
+					break;
+				}
+				else {
+					continue;
+				}
+			}
+		}
+
+
 		if (!hardAnswer.empty())
 		{
 			std::cout << "hard" << std::endl;
@@ -90,3 +103,5 @@ std::string Computer::getAnswer()
 
 		return easyAnswer;
 	}
+
+}
